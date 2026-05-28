@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# package.json only for deps caching
+COPY package*.json ./
+
+RUN npm install
+
+# rest of the code
+COPY . .
+
+CMD ["npx", "nx", "serve", "api"]
+# CMD ["sh", "-c", "tail -f /dev/null"]

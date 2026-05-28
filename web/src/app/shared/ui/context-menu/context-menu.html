@@ -1,0 +1,35 @@
+<div class="relative">
+
+  <!-- Trigger -->
+  <button
+    class="p-2 rounded-lg hover:bg-gray-100"
+    (click)="toggle()"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="isOpen()"
+    aria-label="Open issue actions"
+    type="button"
+  >
+    ⋯
+  </button>
+
+  <!-- Menu -->
+  @if (isOpen()) {
+    <div
+      class="absolute right-0 mt-2 w-40 bg-white border rounded-xl shadow-lg z-50"
+      role="menu"
+    >
+      @for (item of items(); track item.label) {
+        <button
+          class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+          [class.text-red-600]="item.danger"
+          (click)="onItemClick(item)"
+          role="menuitem"
+          type="button"
+        >
+          {{ item.label }}
+        </button>
+      }
+    </div>
+  }
+
+</div>

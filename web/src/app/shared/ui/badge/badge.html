@@ -1,0 +1,13 @@
+<span
+  class="inline-flex items-center gap-2 rounded-full font-medium whitespace-nowrap"
+  [ngClass]="[colorClasses, sizeClasses]"
+  role="status"
+  [attr.aria-label]="'Issue status: ' + label"
+>
+  <span
+    class="w-2 h-2 rounded-full"
+    [ngClass]="dotColor"
+    aria-hidden="true"
+  ></span>
+  <span>{{ label }}</span>
+</span>

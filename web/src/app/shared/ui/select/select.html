@@ -1,0 +1,21 @@
+<select
+  [id]="id"
+  [attr.aria-invalid]="invalid"
+  [attr.aria-describedby]="ariaDescribedBy"
+  [ngClass]="classes"
+  [disabled]="disabled"
+  [ngModel]="value"
+  (ngModelChange)="onSelect($event)"
+>
+  @if (placeholder) {
+    <option [ngValue]="null" disabled>
+      {{ placeholder }}
+    </option>
+  }
+
+  @for (option of options; track option.value) {
+    <option [ngValue]="option.value">
+      {{ option.label }}
+    </option>
+  }
+</select>

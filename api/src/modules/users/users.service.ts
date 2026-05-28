@@ -1,0 +1,64 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+import { UserRole } from '@bugflow-2026/shared-types';
+import { Auth0Service } from '../auth/auth0.service';
+import { RequestUser } from '../../interfaces/auth/request-user.interface';
+
+@Injectable()
+export class UsersService {
+  constructor(
+    @InjectRepository(User) private repo: Repository<User>,
+    private readonly auth0Service: Auth0Service
+  ) {}
+
+  async findByAuth0Id(auth0Id: string) {
+    return await this.repo.findOne({ where: { auth0Id } });
+  }
+
+  async createFromAuth0(data: {
+    auth0Id: string;
+    email: string;
+    name: string;
+    role: UserRole;
+  }) {
+    const user = this.repo.create(data);
+    return await this.repo.save(user);
+  }
+
+  async findOrCreateFromAuth0(auth0User: RequestUser) {
+    const auth0Id = auth0User.sub;
+    const role = auth0User.roles?.[0] as UserRole || UserRole.TESTER;
+    let dbUser = auth0Id && await this.findByAuth0Id(auth0Id);
+
+    if (!dbUser) {
+      const userInfo = await this.auth0Service.getUserInfo(auth0User.accessToken);
+      dbUser = await this.createFromAuth0({
+        auth0Id: userInfo.sub,
+        email: userInfo.email,
+        name: userInfo.name,
+        role,
+      });
+    } else {
+      await this.repo.update(dbUser.id, { role });
+    }
+
+    dbUser.role = role;
+    return dbUser;
+  }
+
+  async findAll() {
+    return await this.repo.find();
+  }
+
+  async updateRole(id: string, role: UserRole) {
+    await this.repo.update(id, { role });
+    return await this.repo.findOne({ where: { id } });
+  }
+
+  async findAssignableUsers() {
+    const users = await this.auth0Service.getUsersFromAuth0();
+    return users;
+  }
+}

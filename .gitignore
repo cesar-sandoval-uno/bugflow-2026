@@ -1,0 +1,64 @@
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# env files
+.env
+.env.*
+!.env.example
+
+# compiled output
+dist
+tmp
+out-tsc
+build
+
+# docker
+docker-compose.override.yml
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+playwright-report/
+test-results/
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+*.tgz
+*.zip
+
+# AUTH / SECRETS
+*.pem
+*.key
+*.crt
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.nx/cache
+.nx/workspace-data
+.claude/worktrees
+.claude/settings.local.json
+
+.angular

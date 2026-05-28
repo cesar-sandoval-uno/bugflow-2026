@@ -1,0 +1,20 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from '../auth/auth.module';
+import { IssuesService } from './issues.service';
+import { IssuesController } from './issues.controller';
+import { IssueEntity } from './entities/issue.entity';
+import { ProjectEntity } from '../projects/entities/project.entity';
+
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([
+      IssueEntity,
+      ProjectEntity,
+    ]),
+    AuthModule,
+  ],
+  controllers: [IssuesController],
+  providers: [IssuesService],
+})
+export class IssuesModule {}

@@ -1,0 +1,78 @@
+<nav
+  class="bg-white border-b shadow-sm px-6 py-3 flex items-center justify-between"
+  aria-label="Main navigation"
+>
+
+  <div class="flex items-center gap-8">
+
+    <div class="flex items-center gap-2">
+      <app-logo [showWelcome]="false"></app-logo>
+    </div>
+
+    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="text-primary"
+        aria-current="page"
+        class="text-muted hover:text-primary transition focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Dashboard
+      </a>
+      <a
+        routerLink="/projects"
+        class="text-muted hover:text-primary transition focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Projects
+      </a>
+      <a
+        routerLink="/issues"
+        class="text-muted hover:text-primary transition focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Issues
+      </a>
+
+      <a
+        *ngIf="isAdmin"
+        routerLink="/users"
+        class="text-muted hover:text-primary transition focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Users
+      </a>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <button
+      class="relative text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+      aria-label="View notifications"
+    >
+      🔔
+      <span
+        class="absolute -top-1 -right-1 bg-secondary text-xs text-black rounded-full px-1"
+        aria-hidden="true"
+      >
+        3
+      </span>
+    </button>
+    <div class="flex items-center gap-2">
+      <div
+        class="w-8 h-8 bg-primary text-white flex items-center justify-center rounded-full text-sm"
+        aria-hidden="true"
+      >
+        {{ (user$ | async)?.name?.[0] }}
+      </div>
+      <span class="text-sm text-dark hidden sm:block">
+        {{ (user$ | async)?.name }}
+      </span>
+    </div>
+
+    <button
+      (click)="logout()"
+      class="bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-primary"
+      aria-label="Log out"
+    >
+      Logout
+    </button>
+
+  </div>
+</nav>

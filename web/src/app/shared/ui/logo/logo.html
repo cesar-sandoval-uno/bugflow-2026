@@ -1,0 +1,32 @@
+@switch (element) {
+  @case ('h1') {
+    <h1 [ngClass]="sizeClasses">
+      <ng-container *ngTemplateOutlet="logoContent"></ng-container>
+    </h1>
+  }
+
+  @case ('h2') {
+    <h2 [ngClass]="sizeClasses">
+      <ng-container *ngTemplateOutlet="logoContent"></ng-container>
+    </h2>
+  }
+
+  @default {
+    <div [ngClass]="sizeClasses">
+      <ng-container *ngTemplateOutlet="logoContent"></ng-container>
+    </div>
+  }
+}
+
+<ng-template #logoContent>
+  @if (showWelcome) {
+    <span [ngClass]="welcomeColor">Welcome to</span>
+  }
+
+  <span>
+    <span class="font-bold" [ngClass]="bugColor">Bug</span>
+    <span class="font-bold" [ngClass]="flowColor">Flow</span>
+  </span>
+
+  <span aria-hidden="true">🐞</span>
+</ng-template>

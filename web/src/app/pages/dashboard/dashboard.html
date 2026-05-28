@@ -1,0 +1,81 @@
+<div class="p-6 space-y-6">
+
+  <!-- HEADER -->
+  <section aria-labelledby="dashboard-title">
+    <h1 id="dashboard-title" class="text-2xl font-semibold text-dark">
+      Dashboard
+    </h1>
+    <p class="text-muted text-sm">
+      Overview of your projects and issues
+    </p>
+  </section>
+
+  @if (state().loading) {
+    <p class="text-sm text-muted">Loading dashboard...</p>
+  }
+
+  <!-- STATS -->
+  <section
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+    aria-label="Dashboard statistics"
+  >
+    @for (stat of stats(); track stat.label) {
+      <app-card [ariaLabel]="stat.label">
+        <div class="flex flex-col">
+          <span class="text-sm text-muted">
+            {{ stat.label }}
+          </span>
+          <span class="text-2xl font-bold text-primary">
+            {{ stat.value }}
+          </span>
+        </div>
+      </app-card>
+    }
+  </section>
+
+  <!-- CONTENT GRID -->
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- RECENT ISSUES -->
+    <app-card ariaLabel="Recent issues">
+      <h2 class="text-lg font-semibold mb-4">
+        Recent Issues
+      </h2>
+
+      <div class="space-y-3">
+        @for (issue of recentIssues(); track issue.id) {
+          <div
+            class="flex items-center justify-between border-b pb-2"
+          >
+            <div class="flex flex-col">
+              <span class="text-sm text-dark">
+                {{ issue.title }}
+              </span>
+              <span class="text-xs text-muted">
+                {{ issue.assignee?.name || 'Unassigned' }}
+              </span>
+            </div>
+            <app-badge [status]="issue.status"></app-badge>
+          </div>
+        }
+      </div>
+    </app-card>
+
+    <!-- RECENT ACTIVITY -->
+    <app-card ariaLabel="Recent activity">
+      <h2 class="text-lg font-semibold mb-4">
+        Activity
+      </h2>
+
+      <ul class="space-y-3 text-sm text-muted">
+        @for (activity of activities; track activity) {
+          <li class="border-b pb-2">
+            {{ activity }}
+          </li>
+        }
+      </ul>
+    </app-card>
+
+  </section>
+
+</div>
