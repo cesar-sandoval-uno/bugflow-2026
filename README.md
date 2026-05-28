@@ -1,96 +1,247 @@
-# Bugflow2026
+# BugFlow
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+BugFlow is a collaborative bug tracking system built to help software development teams efficiently report, manage, and resolve issues across projects.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+The platform provides secure role-based access, real-time collaboration through comments, project management, issue tracking, and notifications — all within a modern full-stack monorepo architecture.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+---
 
-## Run tasks
+# 🚀 Tech Stack
 
-To run tasks with Nx use:
+## Monorepo
+- Nx Workspace
 
-```sh
-npx nx <target> <project-name>
+## Frontend
+- Angular 22
+- Angular Signals
+- Angular Router
+- Auth0 Authentication
+- TailwindCSS
+
+## Backend
+- NestJS
+- TypeORM
+- PostgreSQL (AWS RDS)
+- JWT Authentication (RS256)
+- Auth0 Authorization
+
+## Testing
+- Jest
+- Playwright
+
+---
+
+# ✨ Features
+
+## Authentication & Authorization
+- Auth0 login integration
+- JWT-based authentication
+- Role-based access control
+- Secure API protection with guards
+- Refresh token support
+
+## User Management
+- Admin user management
+- Role assignment (Admin, Developer, Tester)
+- Automatic user synchronization
+
+## Project Management
+- Create and manage projects
+- Invite collaborators
+- Project ownership
+- Team-based access restrictions
+
+## Issue Tracking
+- Create, edit, and manage issues
+- Issue priorities
+- Issue statuses
+- Assignee management
+- Filtering and sorting
+
+## Comments & Collaboration
+- Real-time issue discussions
+- Comment editing and deletion
+- Ownership validation
+- Activity tracking
+
+## Notifications
+- Assignment notifications
+- Status change notifications
+- Comment activity notifications
+
+## Security
+- Helmet protection
+- JWT validation
+- CORS configuration
+- Validation pipes
+- Role guards
+- Secure Auth0 integration
+
+---
+
+# 👥 User Roles
+
+## Admin
+- Full system access
+- Manage users and projects
+- Assign roles
+- View all projects and issues
+
+## Developer
+- Work on assigned issues
+- Create and update issues
+- Participate in discussions
+- Access assigned projects
+
+## Tester
+- Report bugs and issues
+- Comment on issues
+- Track issue progress
+- Access assigned projects
+
+---
+
+# 📁 Monorepo Structure
+
+```bash
+.
+|__api              # NestJS backend
+|__web              # Angular frontend
+|__shared-types     # Shared DTOs, enums, and interfaces
+|__data-access      # Shared frontend data layer
+|__ui               # Shared UI components
+|__api-e2e          # Backend E2E tests
+|__web-e2e          # Frontend E2E tests
 ```
 
-For example:
+---
 
-```sh
-npx nx build myproject
+# ⚙️ Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USERNAME=
+DB_PASSWORD=
+NODE_ENV=development
+
+AUTH0_DOMAIN=
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+---
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# 📦 Installation
 
-## Add new projects
+## Clone the repository
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
+```bash
+git clone https://github.com/cesar-sandoval-uno/bugflow-2026.git
+cd bugflow
 ```
 
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+## Install dependencies
 
-```sh
-# Generate an app
-npx nx g @nx/react:app demo
-
-# Generate a library
-npx nx g @nx/react:lib some-lib
+```bash
+npm install
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+---
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# ▶️ Running the Application
 
-## Set up CI!
+## Start frontend and backend
 
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
+```bash
+npm run dev
 ```
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+## Production build
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
+```bash
+npm run build
 ```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Install Nx Console
+# 🧪 Testing
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## Unit tests
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+nx test api
+nx test web
+```
 
-## Useful links
+## E2E tests
 
-Learn more:
+```bash
+nx e2e api-e2e
+nx e2e web-e2e
+```
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# 🔐 Security Notes
+
+BugFlow includes several security best practices:
+
+- RS256 JWT validation
+- Auth0 integration
+- Secure role validation
+- ValidationPipe sanitization
+- Helmet middleware
+- Restricted CORS configuration
+- Refresh token rotation support
+- Secure environment variable usage
+
+---
+
+# 📚 API Documentation
+
+Swagger documentation is available during development:
+
+```bash
+http://localhost:3000/api/docs
+```
+
+---
+
+# 🛣️ Roadmap
+
+Planned improvements:
+
+- Kanban board
+- File attachments
+- Email notifications
+- Activity audit logs
+- Advanced filtering and search
+- Real-time updates with WebSockets
+- CI/CD pipelines
+- Docker deployment
+
+---
+
+# 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork the repository and submit pull requests.
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+---
