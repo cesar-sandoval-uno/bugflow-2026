@@ -62,3 +62,4 @@ Thumbs.db
 .claude/settings.local.json
 
 .angular
+.vercel
