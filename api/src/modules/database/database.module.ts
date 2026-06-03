@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+const isProduction = process.env.NODE_ENV === 'production';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -10,9 +11,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
+      ssl: isProduction
+        ? { rejectUnauthorized: false }
+        : false,
       autoLoadEntities: true,
-      synchronize: true, // ⚠️ only for development, disable in production
-    }),
+      synchronize: process.env.DB_SYNCHRONIZE === 'true',
+    })
   ],
 })
 export class DatabaseModule {}
