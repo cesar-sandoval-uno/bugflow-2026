@@ -1,6 +1,12 @@
 node_modules
 dist
+coverage
+.tmp
+.angular
+.nx
 .git
-.gitignore
+.github
 Dockerfile*
 docker-compose*
+README.md
+.env
