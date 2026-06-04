@@ -8,8 +8,19 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   const port = process.env.PORT || 3000;
-  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:4200';
+  const allowedOrigins = [
+    'http://localhost:4200',
+  ].filter(Boolean);
 
+  if (process.env.FRONTEND_URL) {
+    allowedOrigins.push(process.env.FRONTEND_URL);
+  }
+
+  app.enableCors({
+    origin: allowedOrigins,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -17,11 +28,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  app.enableCors({
-    origin: [frontendUrl],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  });
   app.setGlobalPrefix(globalPrefix);
   app.use(helmet({
     crossOriginResourcePolicy: false,
