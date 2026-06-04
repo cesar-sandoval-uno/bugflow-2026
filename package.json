@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nx run-many --target=serve --projects=api,web --parallel",
     "build": "nx run-many --target=build --projects=api,web --parallel --configuration=production",
+    "build:web": "nx build web --configuration=production",
     "start": "node dist/api/main.js",
     "start:prod": "npm run build && concurrently \"npm run start\" \"npm run start:web\"",
     "start:web": "nx serve web",
