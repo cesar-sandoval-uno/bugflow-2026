@@ -2,11 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CreateIssuePayload, Issue, UpdateIssuePayload } from '@bugflow-2026/shared-types';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../api-config.token';
 
 @Injectable({ providedIn: 'root' })
 export class IssuesApiService {
   private http = inject(HttpClient);
-  private baseUrl = '/api/issues';
+  private config = inject(API_CONFIG);
+  private baseUrl = `${this.config.baseUrl}/issues`;
 
   getIssues(filters: {
     status?: string;
@@ -25,11 +27,11 @@ export class IssuesApiService {
   }
 
   createIssue(data: CreateIssuePayload) {
-    return this.http.post('/api/issues', data);
+    return this.http.post(this.baseUrl, data);
   }
 
   updateIssue(id: string, data: UpdateIssuePayload) {
-    return this.http.patch(`/api/issues/${id}`, data);
+    return this.http.patch(`${this.baseUrl}/${id}`, data);
   }
 
 }

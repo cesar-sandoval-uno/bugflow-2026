@@ -9,6 +9,7 @@ import { appRoutes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor/error.interceptor-interceptor';
 import { environment } from '../environments/environment';
+import { API_CONFIG } from 'data-access/src/lib/api-config.token';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,5 +31,11 @@ export const appConfig: ApplicationConfig = {
       authInterceptor,
       errorInterceptor,
     ])),
+    {
+      provide: API_CONFIG,
+      useValue: {
+        baseUrl: environment.apiUrl,
+      },
+    },
   ],
 };

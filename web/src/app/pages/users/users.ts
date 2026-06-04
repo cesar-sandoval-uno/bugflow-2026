@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { API_CONFIG } from 'data-access/src/lib/api-config.token';
 
 @Component({
   selector: 'app-users',
@@ -9,9 +10,11 @@ import { Component, inject } from '@angular/core';
 })
 export class UsersPage {
   private http = inject(HttpClient);
+  private config = inject(API_CONFIG);
+  private baseUrl = `${this.config.baseUrl}/users`;
 
   getMe() {
-    this.http.get('/api/users/me').subscribe((data) => {
+    this.http.get(`${this.baseUrl}/me`).subscribe((data) => {
       console.log(data);
     });
   }
