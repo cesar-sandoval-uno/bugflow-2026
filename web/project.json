@@ -26,6 +26,14 @@
               "with": "web/src/environments/environment.prod.ts"
             }
           ]
+        },
+        "staging": {
+          "fileReplacements": [
+            {
+              "replace": "web/src/environments/environment.ts",
+              "with": "web/src/environments/environment.staging.ts"
+            }
+          ]
         }
       }
     },
