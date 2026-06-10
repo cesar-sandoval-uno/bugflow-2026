@@ -6,11 +6,6 @@ on:
       - dev
       - main
 
-  push:
-    branches:
-      - dev
-      - main
-
 jobs:
   quality:
     runs-on: ubuntu-latest
