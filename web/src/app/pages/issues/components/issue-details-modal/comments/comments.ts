@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentsFacade, UsersFacade } from '@bugflow-2026/data-access';
+import { Comment } from '@bugflow-2026/shared-types';
 
 @Component({
   selector: 'app-comments',
@@ -54,7 +55,7 @@ export class CommentsComponent {
     );
   }
 
-  startEdit(comment: any) {
+  startEdit(comment: Comment) {
     this.editingCommentId.set(comment.id);
     this.form.patchValue({
       content: comment.content,

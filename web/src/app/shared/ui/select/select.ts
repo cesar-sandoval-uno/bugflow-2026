@@ -39,8 +39,6 @@ export class SelectComponent<T = string>
   value: T | null = null;
   disabled = false;
 
-  private onChange: (value: T) => void = () => {};
-  private onTouched: () => void = () => {};
   private stringToClasses(classes: string) {
     return classes
       ?.split(' ')
