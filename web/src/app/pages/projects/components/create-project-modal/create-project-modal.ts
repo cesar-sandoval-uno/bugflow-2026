@@ -45,7 +45,6 @@ export class CreateProjectModalComponent {
 
   open(project?: Project) {
     document.body.style.overflow = 'hidden';
-
     this.isOpen.set(true);
     this.currentProject.set(project ?? null);
 
@@ -74,9 +73,7 @@ export class CreateProjectModalComponent {
     this.error.set(null);
   }
 
-  isInvalid(
-    controlName: keyof typeof this.form.controls
-  ) {
+  isInvalid(controlName: keyof typeof this.form.controls) {
     const control = this.form.get(controlName);
 
     return !!(
@@ -97,11 +94,9 @@ export class CreateProjectModalComponent {
     this.form.disable();
 
     const value = this.form.getRawValue();
-    const request$ = this.currentProject()
-      ? this.facade.updateProject(
-          this.currentProject()!.id,
-          value,
-        )
+    const project = this.currentProject();
+    const request$ = project && project.id
+      ? this.facade.updateProject(project.id, value)
       : this.facade.createProject(value);
 
     request$.subscribe({
@@ -110,14 +105,13 @@ export class CreateProjectModalComponent {
         this.form.enable();
         this.close();
         this.notification.show(
-          this.currentProject()
+          project && project.id
             ? 'Project updated successfully'
             : 'Project created successfully',
           'success',
         );
         this.facade.refresh();
       },
-
       error: (err) => {
         this.loading.set(false);
         this.form.enable();

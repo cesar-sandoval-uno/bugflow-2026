@@ -1,12 +1,5 @@
-import {
-  Component,
-  signal,
-  input,
-  HostListener,
-} from '@angular/core';
-
+import { Component, signal, HostListener } from '@angular/core';
 import { Issue } from '@bugflow-2026/shared-types';
-
 import { BadgeComponent } from '../../../../shared/ui/badge/badge';
 import { CommentsComponent } from './comments/comments';
 
