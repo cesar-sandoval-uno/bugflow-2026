@@ -8,10 +8,22 @@ describe('CommentsController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CommentsController],
-      providers: [CommentsService],
+      providers: [
+        {
+          provide: CommentsService,
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
-    controller = module.get<CommentsController>(CommentsController);
+    controller = module.get<CommentsController>(
+      CommentsController,
+    );
   });
 
   it('should be defined', () => {
