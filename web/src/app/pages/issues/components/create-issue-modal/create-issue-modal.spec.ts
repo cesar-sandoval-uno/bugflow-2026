@@ -1,18 +1,55 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateIssueModal } from './create-issue-modal';
+import { signal } from '@angular/core';
+import { of } from 'rxjs';
+import { CreateIssueModalComponent } from './create-issue-modal';
+import { IssuesFacade, ProjectsFacade, UsersFacade } from '@bugflow-2026/data-access';
+import { NotificationService } from '../../../../core/services/notification.service/notification.service';
 
-describe('CreateIssueModal', () => {
-  let component: CreateIssueModal;
-  let fixture: ComponentFixture<CreateIssueModal>;
+describe('CreateIssueModalComponent', () => {
+  let component: CreateIssueModalComponent;
+  let fixture: ComponentFixture<CreateIssueModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateIssueModal],
+      imports: [CreateIssueModalComponent],
+      providers: [
+        {
+          provide: IssuesFacade,
+          useValue: {
+            createIssue: jest.fn(),
+            updateIssue: jest.fn(),
+            refresh: jest.fn(),
+          },
+        },
+        {
+          provide: ProjectsFacade,
+          useValue: {
+            refresh: jest.fn(),
+            projectsState: signal({
+              data: [],
+            }),
+          },
+        },
+        {
+          provide: UsersFacade,
+          useValue: {
+            me: signal(null),
+            getAssignableUsers: jest.fn(() => of([])),
+          },
+        },
+        {
+          provide: NotificationService,
+          useValue: {
+            show: jest.fn(),
+          },
+        },
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateIssueModal);
+    fixture = TestBed.createComponent(CreateIssueModalComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+
+    fixture.detectChanges();
   });
 
   it('should create', () => {

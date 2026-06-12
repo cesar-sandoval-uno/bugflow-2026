@@ -38,6 +38,8 @@ export class SelectComponent<T = string>
 
   value: T | null = null;
   disabled = false;
+  protected onChange: (value: T) => void = (_value: T) => _value;
+  protected onTouched: () => void = () => undefined;
 
   private stringToClasses(classes: string) {
     return classes

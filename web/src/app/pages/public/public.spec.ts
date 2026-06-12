@@ -1,17 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Public } from './public';
+import { PublicPage } from './public';
+import { AuthService } from '@auth0/auth0-angular';
 
-describe('Public', () => {
-  let component: Public;
-  let fixture: ComponentFixture<Public>;
+describe('PublicPage', () => {
+  let component: PublicPage;
+  let fixture: ComponentFixture<PublicPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Public],
+      imports: [PublicPage],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            loginWithRedirect: jest.fn(),
+          },
+        },
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Public);
+    fixture = TestBed.createComponent(PublicPage);
     component = fixture.componentInstance;
+
     await fixture.whenStable();
   });
 

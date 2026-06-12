@@ -4,7 +4,7 @@
   [attr.aria-describedby]="ariaDescribedBy"
   [ngClass]="classes"
   [disabled]="disabled"
-  [ngModel]="value"
+  [(ngModel)]="value"
   (ngModelChange)="onSelect($event)"
 >
   @if (placeholder) {

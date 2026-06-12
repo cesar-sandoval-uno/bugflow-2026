@@ -90,5 +90,6 @@
       "linter": "eslint",
       "unitTestRunner": "jest"
     }
-  }
+  },
+  "nxIgnorePatterns": [".vercel/**"]
 }
