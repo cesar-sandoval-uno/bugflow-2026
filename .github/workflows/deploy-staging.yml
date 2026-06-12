@@ -25,8 +25,11 @@ jobs:
       - name: Lint
         run: npx nx run-many --target=lint --all
 
-      - name: Unit Tests
-        run: npx nx run-many --target=test --all
+      - name: Backend Tests
+        run: npx nx test api
+
+      - name: Frontend Tests
+        run: npx nx test web
 
   deploy-web:
     name: Deploy Vercel Staging
